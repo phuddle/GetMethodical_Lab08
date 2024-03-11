@@ -13,8 +13,8 @@ public class SafeInput {
         String retString = ""; // Set this to zero length. Loop runs until it isn’t
         do {
             System.out.print("\n" + prompt + ": "); // show prompt add space
-            retString = pipe.nextLine();
-        } while (retString.length() == 0);
+            retString = pipe.nextLine(); //read inpu
+        } while (retString.length() == 0); //continue looping if not in range
         return retString;
     }
 
@@ -26,16 +26,16 @@ public class SafeInput {
      * @return the integer input by the user
      */
     public static int getInt(Scanner pipe, String prompt) {
-        int number;
+        int number; //variable to hold integer input
         do {
-            System.out.print("\n" + prompt + ": ");
-            while (!pipe.hasNextInt()) {
-                String input = pipe.next();
-                System.out.println("\"" + input + "\" is not a valid integer. Please try again.");
-                System.out.print(prompt + ": ");
+            System.out.print("\n" + prompt + ": "); //display prompt for user
+            while (!pipe.hasNextInt()) { //keep looping until integer is entered
+                String input = pipe.next(); //read input as a string
+                System.out.println("\"" + input + "\" is not a valid integer. Please try again."); //error message
+                System.out.print(prompt + ": "); //display prompt again
             }
             number = pipe.nextInt();
-        } while (number < Integer.MIN_VALUE || number > Integer.MAX_VALUE);
+        } while (number < Integer.MIN_VALUE || number > Integer.MAX_VALUE); //keep looping if input is outside the range
         return number;
     }
 
@@ -49,15 +49,15 @@ public class SafeInput {
     public static double getDouble(Scanner pipe, String prompt) {
         double number;
         do {
-            System.out.print("\n" + prompt + ": ");
-            while (!pipe.hasNextDouble()) {
-                String input = pipe.next();
-                System.out.println("\"" + input + "\" is not a valid double. Please try again.");
-                System.out.print(prompt + ": ");
+            System.out.print("\n" + prompt + ": "); //display prompt for user
+            while (!pipe.hasNextDouble()) { //keep looping until double is entered
+                String input = pipe.next(); //read input as string
+                System.out.println("\"" + input + "\" is not a valid double. Please try again."); //error message
+                System.out.print(prompt + ": "); //display prompt again
             }
-            number = pipe.nextDouble();
-        } while (number < Double.MIN_VALUE || number > Double.MAX_VALUE);
-        return number;
+            number = pipe.nextDouble(); //read double input
+        } while (number < Double.MIN_VALUE || number > Double.MAX_VALUE); //continue loop
+        return number; 
     }
 
     /**
@@ -72,14 +72,14 @@ public class SafeInput {
     public static int getRangedInt(Scanner pipe, String prompt, int low, int high) {
         int number;
         do {
-            System.out.print("\n" + prompt + " [" + low + " - " + high + "]: ");
-            while (!pipe.hasNextInt()) {
-                String input = pipe.next();
-                System.out.println("\"" + input + "\" is not a valid integer. Please try again.");
-                System.out.print(prompt + " [" + low + " - " + high + "]: ");
+            System.out.print("\n" + prompt + " [" + low + " - " + high + "]: "); //display prompt for user
+            while (!pipe.hasNextInt()) { //keep looping until integer is entered
+                String input = pipe.next(); //read input as string
+                System.out.println("\"" + input + "\" is not a valid integer. Please try again."); //error message
+                System.out.print(prompt + " [" + low + " - " + high + "]: "); //display prompt again
             }
-            number = pipe.nextInt();
-        } while (number < low || number > high);
+            number = pipe.nextInt(); //read integer input
+        } while (number < low || number > high); //continue loop if not within range
         return number;
     }
 
@@ -95,14 +95,14 @@ public class SafeInput {
     public static double getRangedDouble(Scanner pipe, String prompt, double low, double high) {
         double number;
         do {
-            System.out.print("\n" + prompt + " [" + low + " - " + high + "]: ");
-            while (!pipe.hasNextDouble()) {
-                String input = pipe.next();
-                System.out.println("\"" + input + "\" is not a valid double. Please try again.");
-                System.out.print(prompt + " [" + low + " - " + high + "]: ");
+            System.out.print("\n" + prompt + " [" + low + " - " + high + "]: "); //display prompt for user
+            while (!pipe.hasNextDouble()) { //keep looping until double is entered
+                String input = pipe.next(); //read input as string
+                System.out.println("\"" + input + "\" is not a valid double. Please try again."); //error message
+                System.out.print(prompt + " [" + low + " - " + high + "]: "); //display prompt again
             }
-            number = pipe.nextDouble();
-        } while (number < low || number > high);
+            number = pipe.nextDouble(); //read double input
+        } while (number < low || number > high); //continue loop if input isnt in range
         return number;
     }
 
@@ -116,10 +116,10 @@ public class SafeInput {
     public static boolean getYNConfirm(Scanner pipe, String prompt) {
         char response;
         do {
-            System.out.print("\n" + prompt + " [Y/N]: ");
-            response = Character.toUpperCase(pipe.next().charAt(0));
-        } while (response != 'Y' && response != 'N');
-        return response == 'Y';
+            System.out.print("\n" + prompt + " [Y/N]: "); //display prompt for user
+            response = Character.toUpperCase(pipe.next().charAt(0)); //read first char of user input and convert to uppercase
+        } while (response != 'Y' && response != 'N'); //keep looping until user enters y or n
+        return response == 'Y'; //returns true if user enters y, false otherwise
     }
 
     /**
@@ -133,9 +133,9 @@ public class SafeInput {
     public static String getRegExString(Scanner pipe, String prompt, String regEx) {
         String input;
         do {
-            System.out.print("\n" + prompt + ": ");
+            System.out.print("\n" + prompt + ": "); //display prompt for user
             input = pipe.next();
-        } while (!input.matches(regEx));
+        } while (!input.matches(regEx)); //continue looping
         return input;
     }
 
@@ -145,13 +145,13 @@ public class SafeInput {
      * @param msg the message to be centered in the header
      */
     public static void prettyHeader(String msg) {
-        int totalWidth = 60;
-        int msgWidth = msg.length();
+        int totalWidth = 60; //define total width of the header
+        int msgWidth = msg.length(); //calculate msg length
         int starsWidth = (totalWidth - msgWidth - 4) / 2; // 4 for the three stars on either side and the space
-        StringBuilder header = new StringBuilder();
+        StringBuilder header = new StringBuilder(); //to build the header
 
         // Top row of stars
-        for (int i = 0; i < totalWidth; i++) {
+        for (int i = 0; i < totalWidth; i++) { 
             header.append("*");
         }
         header.append("\n");
